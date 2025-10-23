@@ -1,5 +1,6 @@
 require_relative "lib/game_state"
 require "yaml"
+require "colorize"
 
 def load_game
   # load saved game
@@ -29,6 +30,10 @@ def main
     print "Current guess: #{current_state.guessed}\n"
     print "Guess a letter: "
     letter = gets.chomp.downcase
+    until letter.length == 1
+      print "Invalid input! \n".colorize(:red) +"Guess a letter: "
+      letter = gets.chomp.downcase
+    end
     current_state.check_letter(letter)
   end
 end
