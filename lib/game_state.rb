@@ -7,10 +7,15 @@ class Game_state
   end
 
   def check_letter(letter)
+    found = false
     secret_word.chars.each_with_index do |lett, index|
       if lett == letter
         guessed[index] = letter
+        found = true
       end
+    end
+    unless found
+      self.mistake_count += 1
     end
   end
 end

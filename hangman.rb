@@ -24,6 +24,7 @@ end
 def main
   current_state = load_game
   while true
+    p current_state.mistake_count
     print "actual word: #{current_state.secret_word}\n"
     print "Current guess: #{current_state.guessed}\n"
     print "Guess a letter: "
