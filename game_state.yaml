@@ -1,0 +1,4 @@
+--- !ruby/object:Game_state
+secret_word: screening
+guessed: sc_ee____
+mistake_count: 1
