@@ -22,4 +22,24 @@ class Game_state
   def game_ended?
     mistake_count == 6 || guessed == secret_word
   end
+
+  def print_man
+    print "-+-\n"
+    case self.mistake_count
+    when 1
+      print " O \n"
+    when 2
+      print " O \n | \n"
+    when 3
+      print " O \n/| \n"
+    when 4
+      print " O \n/|\\ \n"
+    when 5
+      print " O \n/|\\\n/"
+    when 6
+      print " O \n/|\\\n/ \\ \n"
+    else
+      nil
+    end
+  end
 end

@@ -25,6 +25,7 @@ end
 def main
   current_state = load_game
   while !current_state.game_ended?
+    current_state.print_man
     print "actual word: #{current_state.secret_word}\n"
     print "Current guess: #{current_state.guessed}\n"
     print "Guess a letter: "
@@ -38,6 +39,7 @@ def main
   if current_state.guessed == current_state.secret_word
     print("Congratulatiuons! You won!\n")
   else
+    current_state.print_man
     print("Game Over! You lose!\n")
   end
 end
