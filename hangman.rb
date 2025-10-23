@@ -14,7 +14,10 @@ unless saved_game
   end
   secret_word = words[rand(words.length)].chomp
   guessed = secret_word.gsub(/[a-z]/i, "_")
+  current_state = Game_state.new(secret_word, guessed)
+else
+  current_state = Game_state.new(saved_game[:secret_word], saved_game[:guessed], saved_game[:mistake_count])
 end
 
-p secret_word
-p guessed
+p current_state.secret_word
+p current_state.guessed
