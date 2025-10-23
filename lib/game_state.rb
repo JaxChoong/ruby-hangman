@@ -5,4 +5,12 @@ class Game_state
     @guessed = guessed
     @mistake_count = mistake_count
   end
+
+  def check_letter(letter)
+    secret_word.chars.each_with_index do |lett, index|
+      if lett == letter
+        guessed[index] = letter
+      end
+    end
+  end
 end

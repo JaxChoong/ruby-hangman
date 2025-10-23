@@ -21,6 +21,15 @@ def load_game
   end
 end
 
-current_state = load_game
-p current_state.secret_word
-p current_state.guessed
+def main
+  current_state = load_game
+  while true
+    print "actual word: #{current_state.secret_word}\n"
+    print "Current guess: #{current_state.guessed}\n"
+    print "Guess a letter: "
+    letter = gets.chomp.downcase
+    current_state.check_letter(letter)
+  end
+end
+
+main
