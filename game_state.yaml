@@ -1,4 +1,4 @@
 --- !ruby/object:Game_state
-secret_word: screening
-guessed: sc_ee____
+secret_word: suspended
+guessed: s_sp_____
 mistake_count: 1

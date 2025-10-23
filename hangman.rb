@@ -4,22 +4,7 @@ require "colorize"
 
 def load_game
   # load saved game
-  saved_game = File.exist?("game_state.yaml") ? YAML.safe_load_file("game_state.yaml", permitted_classes: [Game_state]) : nil
-
-  # if no saved game, create new game
-  unless saved_game
-    words = []
-    File.open("google-10000-english-no-swears.txt", "r") do |file|
-      file.each_line do |line|
-        words << line if line.chomp.length.between?(5, 12)
-      end
-    end
-    secret_word = words[rand(words.length)].chomp
-    guessed = secret_word.gsub(/[a-z]/i, "_")
-    current_state = Game_state.new(secret_word, guessed)
-  else
-    current_state = saved_game
-  end
+  saved_game = File.exist?("game_state.yaml") ? YAML.safe_load_file("game_state.yaml", permitted_classes: [Game_state]) : (puts "No saved game! Creating new game.")
 end
 
 def save_game(current_state)
@@ -29,11 +14,26 @@ def save_game(current_state)
   end
 end
 
+def create_game
+  puts "Creating new game..."
+  words = []
+  File.open("google-10000-english-no-swears.txt", "r") do |file|
+    file.each_line do |line|
+      words << line if line.chomp.length.between?(5, 12)
+    end
+  end
+  secret_word = words[rand(words.length)].chomp
+  guessed = secret_word.gsub(/[a-z]/i, "_")
+  Game_state.new(secret_word, guessed)
+end
 def main
-  current_state = load_game
+  print "Load saved game? (Y/N): "
+  load_saved = gets.chomp.upcase
+  # load saved game if selected, else just create new game
+  current_state = load_saved == "Y" ? load_game : create_game
+  
   while !current_state.game_ended?
     current_state.print_man
-    print "actual word: #{current_state.secret_word}\n"
     print "Current guess: #{current_state.guessed}\n"
     print "Save Game? (Y/N): "
     save = gets.chomp.upcase
