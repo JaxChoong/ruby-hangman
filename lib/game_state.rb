@@ -18,4 +18,8 @@ class Game_state
       self.mistake_count += 1
     end
   end
+
+  def game_ended?
+    mistake_count == 6 || guessed == secret_word
+  end
 end

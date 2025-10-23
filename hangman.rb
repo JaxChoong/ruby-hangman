@@ -24,8 +24,7 @@ end
 
 def main
   current_state = load_game
-  while true
-    p current_state.mistake_count
+  while !current_state.game_ended?
     print "actual word: #{current_state.secret_word}\n"
     print "Current guess: #{current_state.guessed}\n"
     print "Guess a letter: "
@@ -35,6 +34,11 @@ def main
       letter = gets.chomp.downcase
     end
     current_state.check_letter(letter)
+  end
+  if current_state.guessed == current_state.secret_word
+    print("Congratulatiuons! You won!\n")
+  else
+    print("Game Over! You lose!\n")
   end
 end
 
