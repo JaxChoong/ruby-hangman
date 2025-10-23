@@ -1,4 +1,4 @@
---- !ruby/object:Game_state
-secret_word: suspended
-guessed: s_sp_____
+--- !ruby/object:GameState
+secret_word: unless
+guessed: u_____
 mistake_count: 1

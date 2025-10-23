@@ -1,6 +1,18 @@
-class Game_state
+# Keeps track of game state, as well as functions relating to game loop
+class GameState
+  HANGMAN_STAGES = [
+    "",
+    " O ",
+    " O \n | ",
+    " O \n/| ",
+    " O \n/|\\ ",
+    " O \n/|\\\n/",
+    " O \n/|\\\n/ \\ "
+  ].freeze
+
   attr_accessor :secret_word, :guessed, :mistake_count
-  def initialize(secret_word,guessed,mistake_count=0)
+
+  def initialize(secret_word, guessed, mistake_count = 0)
     @secret_word = secret_word
     @guessed = guessed
     @mistake_count = mistake_count
@@ -14,9 +26,9 @@ class Game_state
         found = true
       end
     end
-    unless found
-      self.mistake_count += 1
-    end
+    return if found
+
+    self.mistake_count += 1
   end
 
   def game_ended?
@@ -25,21 +37,6 @@ class Game_state
 
   def print_man
     print "-+-\n"
-    case self.mistake_count
-    when 1
-      print " O \n"
-    when 2
-      print " O \n | \n"
-    when 3
-      print " O \n/| \n"
-    when 4
-      print " O \n/|\\ \n"
-    when 5
-      print " O \n/|\\\n/"
-    when 6
-      print " O \n/|\\\n/ \\ \n"
-    else
-      nil
-    end
+    print "#{HANGMAN_STAGES[mistake_count]}\n"
   end
 end
